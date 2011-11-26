@@ -1,0 +1,33 @@
+Why did I choose to create a copy of the pcb-gcode program?
+1. I didn't want the user to be able to edit the settings for the MezzoMill and then be unable to get back into a usable state. 
+2. I didn't want the user to use a different version of pcb-gcode (via upgrade or whatever) than I tested with and hit issues that I would be unable to solve.
+3. I didn't want any changes I made to interfere with normal pcb-gcode usage for other purposes. (ex .mmg output instead of .tap)
+
+All the changes that were made to modify the pcb-gcode-3 directory:
+
+cp -r pcb-gcode-3/ pcb-gcode-3-copy
+cd pcb-gcode-3-copy/
+find . -type f | egrep '\.(h|cpp|ulp|pp)' |  xargs perl -p -i -e 's:(plugins|profiles|safe_options|settings|source|viewer)/:MM/\1/:g'
+mkdir MM
+mv docs make plugins profiles safe_options settings source viewer MM
+mv pcb-gcode-setup.ulp MM-setup.ulp 
+mv pcb-gcode.ulp MM.ulp
+mv plugin_headers.h MM_plugin_headers.h 
+mkdir MM_oldFiles
+mv pcbgcode.tmproj MM_oldFiles
+mv rakefile.rb MM_oldFiles
+mv README MM_oldFiles
+mv MM/make MM_oldFiles
+
+cp -r * /Applications/EAGLE/ulp/
+
+Then I edited constants via the MM-setup.ulp
+I copied those settings back:
+cp -r /Applications/EAGLE/ulp/MM/settings/* MM/settings
+
+To show what is different from stock I ran:
+mkdir MM_settings-diff-info
+diff -r ../pcb-gcode-3/settings ../MMEagleULP/MM/settings > MM_settings-diff-info/MM_settings-diff-info.diff
+
+Then I removed the ability to change the settings:
+mv MM-setup.ulp MM_oldFiles
