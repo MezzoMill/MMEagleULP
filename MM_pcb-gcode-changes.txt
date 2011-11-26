@@ -1,7 +1,7 @@
 Why did I choose to create a copy of the pcb-gcode program?
 1. I didn't want the user to be able to edit the settings for the MezzoMill and then be unable to get back into a usable state. 
-2. I didn't want the user to use a different version of pcb-gcode (via upgrade or whatever) than I tested with and hit issues that I would be unable to solve.
-3. I didn't want any changes I made to interfere with normal pcb-gcode usage for other purposes. (ex .mmg output instead of .tap)
+2. I didn't want the user to use a different version of pcb-gcode (ex. via an upgrade) than I tested with and hit issues that I would be unable to solve.
+3. I didn't want any changes I made to pcb-gcode usage to affect the normal  usage of pcb-gcode for other purposes. (ex The use of .mmg output instead of .tap)
 
 All the changes that were made to modify the pcb-gcode-3 directory:
 
